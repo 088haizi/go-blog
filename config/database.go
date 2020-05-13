@@ -2,12 +2,13 @@ package config
 
 import (
 	"fmt"
-
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+
+	"github.com/088haizi/go-blog/database"
 )
 
-var DB *gorm.DB
+var db *gorm.DB
 
 type DBConfig struct {
 	host		string
@@ -22,7 +23,7 @@ func BuildDBConfig() *DBConfig {
 		host:     "0.0.0.0",
 		port:     3306,
 		user:     "root",
-		dbName:   "todos",
+		dbName:   "go_blog",
 		password: "hiamroot",
 	}
 	return &dbConfig
@@ -37,4 +38,31 @@ func DBUrl(dbConfig *DBConfig) string {
 		dbConfig.port,
 		dbConfig.dbName,
 	)
+}
+
+func CreateMysqlConn() *gorm.DB {
+	var err error
+
+	db, err = gorm.Open("mysql", DBUrl(BuildDBConfig()))
+	if err != nil {
+		fmt.Println("status: ", err)
+	}
+	fmt.Println("create mysql database connection successful")
+
+	return db
+}
+
+func DBConn() *gorm.DB {
+	return db
+}
+
+func DBClose() {
+	db.Close()
+}
+
+func Migrate() {
+	CreateMysqlConn()
+	defer DBClose()
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&database.Post{})
+	//db.Model(&database.Post{}).AddIndex("created_at")
 }
