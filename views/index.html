@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+< lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Info Poison</title>
+    <style type = "text/css">
+        @font-face {
+            font-family: "CCRedAlert";
+            src: url("C&C-Red-Alert[LAN].ttf");
+        }
+        @font-face {
+            font-family: "spray";
+            src: url("ideoma_SPRAY.otf");
+        }
+        body {
+            /*background image*/
+            background-attachment: fixed;
+            background-position: center;
+            background-image: url('MimikBanka.jpg');
+            background-repeat: repeat;
+            background-size: 100%;
+        }
+        .content {
+            font-family: CCRedAlert;
+            font-size: 36px;
+            color: white;
+
+            /* .center */
+            text-align: center;
+            width: 940px;
+            margin: 0;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        .right-align {
+            margin-right: 20%;
+            font-size: 27px;
+            text-align: right;
+        }
+        .left-align {
+            margin-left: 20%;
+            text-align: left;
+        }
+        .cityline {
+            text-align: left;
+        }
+        .timeline {
+            width: 127px;
+            margin-right: 30%;
+            text-align: left;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+<script>
+    var app5 = new Vue({
+        el: '#schedules',
+        data: {
+            tour: false,
+            english: true,
+            chinese: false,
+            sorry: true,
+            schedules: null,
+            englishSchedules: [
+                { city: 'Chengdu', time: '2020/06/19' },
+                { city: 'Xi\'an', time: '2020/06/20' },
+                { city: 'Chongqing', time: '2020/06/21' },
+                { city: 'Shanghai', time: '2020/07/03' },
+                { city: 'Hangzhou', time: '2020/07/04' },
+                { city: 'Nanjing', time: '2020/07/05' }
+            ],
+            chineseSchedules: [
+                { city: '成都', time: '2020/06/19' },
+                { city: '西安', time: '2020/06/20' },
+                { city: '重庆', time: '2020/06/21' },
+                { city: '上好', time: '2020/07/03' },
+                { city: '杭州', time: '2020/07/04' },
+                { city: '南京', time: '2020/07/05' }
+            ]
+        },
+        methods: {
+            showSchedule: function () {
+                // console.log('test')
+                this.tour = true
+                this.schedules = this.englishSchedules
+                this.sorry = false
+            },
+            showEnglish: function () {
+                this.english = true
+                this.chinese = false
+                this.schedules = this.englishSchedules
+            },
+            showChinese: function () {
+                this.english = false
+                this.chinese = true
+                this.schedules = this.chineseSchedules
+            }
+        }
+    })
+
+</script>
+</html>
